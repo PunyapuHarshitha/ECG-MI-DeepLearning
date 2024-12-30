@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classification Result</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:white; }
+
+        .header {
+            background-color: #4CAF50; 
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color:white; /* White container background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+        }
+
+        .result-heading {
+            text-align: center;
+            color:black;
+        }
+
+        .result-text {
+            text-align: center;
+            color: red;
+            font-size: 18px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid red; /* Green border */
+            padding: 10px;
+        }
+
+        #displayed-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ECG-CNN Fusion: Unleashing Deep Learning for Myocardial Infarction Prediction</h1>
+    </div>
+    <div class="container">
+        <h2 class="result-heading">Classification Result</h2>
+        <p class="result-text">The image is classified as: <span id="result">{{ result }}</span></p>
+        <div class="image-container">
+            <img id="displayed-img" src="{{static_image_path}}" alt="Uploaded Image">
+        </div>
+    </div>
+</body>
+</html>

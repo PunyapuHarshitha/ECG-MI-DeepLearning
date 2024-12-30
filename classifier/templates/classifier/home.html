@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECG-CNN Fusion: Unleashing Deep Learning for                                           
+        Myocardial Infarction Prediction </title>
+</head>
+<body>
+    
+    <div class="header">
+        <h1>ECG-CNN Fusion: Unleashing Deep Learning for                                           
+            Myocardial Infarction Prediction </h1>
+      </div>
+
+    <form method="post" action="{% url 'classify' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="Neon-theme-dragdropbox" id="drop-zone">
+            <input type="file" name="uploaded_image" id="file-input" accept="image/*" style="display: none;" required>
+            <div class="Neon-input-dragDrop">
+                <div class="Neon-input-inner">
+                    <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                    <div class="Neon-input-text">
+                        <h3>Drag &amp; Drop files here</h3>
+                        <span style="display:inline-block; margin: 15px 0">or</span>
+                    </div>
+                    <a class="Neon-input-choose-btn blue" onclick="chooseFile()">Browse Files</a>
+                </div>
+            </div>
+        </div>
+        <div id="img-box">
+            <img id="displayed-img" src="#" alt="Uploaded Image">
+        </div>
+        <button id="classify-button" type="submit" align="center">Classify</button>
+    </form>
+</body>
+
+<script>
+     
+        // Function to handle file selection
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                const file = files[0];
+                displayImage(file);
+            }
+        }
+
+        // Function to handle drag-and-drop file selection
+        function handleDrop(event) {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                displayImage(file);
+            }
+        }
+
+        // Function to display the selected image
+        function displayImage(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const displayedImg = document.getElementById("displayed-img");
+                displayedImg.src = e.target.result;
+                imgBox.style.display = 'block'
+                classifyBtn.style.display = 'block'
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Function to simulate file input click
+        function chooseFile() {
+            document.getElementById("file-input").click();
+        }
+
+        // Set up event listeners
+        const fileInput = document.getElementById("file-input");
+        const dropZone = document.getElementById("drop-zone");
+        const imgBox = document.getElementById('img-box')
+        const classifyBtn = document.getElementById('classify-button')
+
+        fileInput.addEventListener("change", handleFileSelect);
+        dropZone.addEventListener("dragover", (event) => {
+            event.preventDefault();
+            dropZone.style.borderColor = "#e74c3c";
+        });
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.style.borderColor = "#3498db";
+        });
+        dropZone.addEventListener("drop", handleDrop);
+    
+    </script>
+
+<style>
+
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+   
+    margin: 0;
+            padding: 0;
+}
+    
+.header {
+    background-color:#4CAF50; 
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+
+    }
+
+    /* Add some styles for the drag-and-drop box */
+    .Neon-theme-dragdropbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2em auto;
+        padding: 2em;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+    }
+
+    .Neon-input-dragDrop {
+        text-align: center;
+    }
+
+    .Neon-input-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Neon-input-icon {
+        font-size: 48px;
+        color:  #4CAF50;
+    }
+
+    .Neon-input-text {
+        margin-top: 15px;
+    }
+
+    .Neon-input-choose-btn {
+        display: inline-block;
+        background-color:  #4CAF50;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 1em;
+        cursor: pointer;
+        
+    }
+
+    /* Displayed image styles */
+    #img-box {
+        text-align: center;
+        margin: 2em auto;
+        border: 2px solid #4CAF50;
+        max-width: 320px; /* Set a fixed width */
+        height: auto; /* Set a fixed height */
+        overflow: hidden; /* Hide overflow content */
+        display: none;
+        object-fit: contain;
+
+    }
+
+    #displayed-img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    #classify-button{
+        display: none;
+        position: fixed;
+        bottom: 10px;
+        left:10px;
+        background-color:#4CAF50;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 1em;
+        cursor: pointer;
+        align-content: center;
+        text-align: center;
+        
+    }
+
+</style>
+
+</html>
